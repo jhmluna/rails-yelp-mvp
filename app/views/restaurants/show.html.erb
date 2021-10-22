@@ -1,19 +1,27 @@
-<h1><%= @restaurant.name %></h1>
-<p><%= @restaurant.address%></p>
-<p><%= @restaurant.phone_number %></p>
-<h3>Reviews</h3>
-  <ul class="list-group">
-    <% @restaurant.reviews.each do |review| %>
-      <li class="list-group-item"><%= review.content %></li>
-    <% end %>
-  </ul>
+<div class="container col-lg-8 mb-5">
+  <h1><%= @restaurant.name %></h1>
+  <p><strong>Address: </strong> <%= @restaurant.address%></p>
+  <p><strong>Tel: </strong><%= @restaurant.phone_number %></p>
+  <h4>Reviews</h4>
+    <ul class="list-group mb-4">
+      <% @restaurant.reviews.each do |review| %>
+        <li class="list-group-item">
+          <div class="d-flex justify-content-between">
+            <span><%= review.content %></span>
+            <span><%= '⭐' * review.rating%></span>
+          </div>
+        </li>
+      <% end %>
+    </ul>
 
-<h4>If you know this restaurant, leave your comment.</h4>
-<%= simple_form_for [@restaurant, @review] do |f| %>
-  <%= f.input :content %>
-  <%= f.input :rating, collection: 0..5 %>
-  <!-- adds bootstrap button  -->
-  <%= f.submit class: 'btn btn-primary' %>
-<% end %>
-
-<p><%= link_to 'Back to restaurants', restaurants_path %></p>
+  <h4>If you know this restaurant, leave your comment.</h4>
+  <%= simple_form_for [@restaurant, @review] do |f| %>
+    <%= f.input :content %>
+    <%= f.input :rating, collection: 0..5 %>
+    <!-- adds bootstrap button  -->
+    <div class="d-flex justify-content-between">
+      <%= f.submit class: 'btn btn-primary' %>
+      <%= link_to 'Back to restaurants', restaurants_path, class: "btn btn-outline-secondary" %>
+    </div>
+  <% end %>
+</div>

@@ -1,7 +1,9 @@
 <h1>All Restaurants</h1>
 
-<%= link_to 'Create a new Restaurant', new_restaurant_path, class: "btn btn-secondary" %>
-<ul class="list-group list-group-flush">
+<%
+=begin %>
+<%= link_to 'Create a new Restaurant', new_restaurant_path, class: "btn btn-outline-secondary" %>
+<ul class="list-group list-group-flush mt-3">
   <% @restaurants.each do |restaurant| %>
     <li class="list-group-item">
       <h5><%= link_to restaurant.name, restaurant_path(restaurant)%></h5>
@@ -9,3 +11,19 @@
     </li>
   <% end %>
 </ul>
+<%
+=end %>
+<%= link_to 'Create a new Restaurant', new_restaurant_path, class: "btn btn-outline-secondary mb-3" %>
+<div class="row row-cols-1 row-cols-md-3">
+  <% @restaurants.each do |restaurant| %>
+    <div class="col mb-4">
+      <div class="card h-100">
+        <div class="card-body">
+          <h5 class="card-title"><%= restaurant.name %></h5>
+          <h6 class="card-subtitle mb-2 text-muted"><%= restaurant.category %></h6>
+          <%= link_to 'View details', restaurant_path(restaurant), class: "card-link" %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>
